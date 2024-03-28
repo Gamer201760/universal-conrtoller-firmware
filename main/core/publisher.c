@@ -4,7 +4,7 @@
 #include "utils/parser.h"
 #include "core.h"
 
-const char *PUB_TAG = "PUB";
+static const char *TAG = "PUB";
 
 TaskHandle_t BTNHandler = NULL;
 TaskHandle_t ADCHandler = NULL;
@@ -45,7 +45,7 @@ void adc_publisher(void *params)
 {
     esp_mqtt_client_handle_t client = params;
 
-    int adc_pins[] = {33, 32, 35, 36};
+    int adc_pins[] = {33, 35, 36};
     char topic[18] = "controller/gpio/";
     for (int i = 0; i < sizeof(adc_pins) / sizeof(adc_pins[0]); i++)
     {
@@ -79,27 +79,27 @@ void publisher(esp_mqtt_client_handle_t *client)
 {
     if (ADCHandler == NULL){
         xTaskCreate(adc_publisher, "ADC_PUB", 4096, (void *)*client, tskIDLE_PRIORITY, &ADCHandler);
-        ESP_LOGI(PUB_TAG, "ADC task start");
+        ESP_LOGI(TAG, "ADC task start");
     } else {
         vTaskResume(ADCHandler);
-        ESP_LOGI(PUB_TAG, "ADC task resume");
+        ESP_LOGI(TAG, "ADC task resume");
     }
     if (BTNHandler == NULL){
         xTaskCreate(btn_publisher, "BTN_PUB", 4096, (void *)*client, tskIDLE_PRIORITY, &BTNHandler);
-        ESP_LOGI(PUB_TAG, "BTN task start");
+        ESP_LOGI(TAG, "BTN task start");
     } else {
         vTaskResume(BTNHandler);
-        ESP_LOGI(PUB_TAG, "BTN task resume");
+        ESP_LOGI(TAG, "BTN task resume");
     }
 }
 
 void publisher_stop(){
     if (BTNHandler != NULL){
         vTaskSuspend(BTNHandler);
-        ESP_LOGI(PUB_TAG, "BTN task stop");
+        ESP_LOGI(TAG, "BTN task stop");
     }
     if (ADCHandler != NULL){
         vTaskSuspend(ADCHandler);
-        ESP_LOGI(PUB_TAG, "ADC task stop");
+        ESP_LOGI(TAG, "ADC task stop");
     }
 }

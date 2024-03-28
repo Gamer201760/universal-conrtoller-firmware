@@ -17,8 +17,8 @@ bool validate_json(const cJSON *object, const char *members[], const int len){
 	return 1;
 }
 
-esp_err_t parse_gpio_data(gpio_data *data, char *payload){
-    cJSON *root = cJSON_Parse(payload);
+esp_err_t parse_gpio_data(gpio_data *data, char **payload){
+    cJSON *root = cJSON_Parse(*payload);
 	if (!validate_json(root, GPIO_DATA_MEMBERS, 2)){
 		return ESP_FAIL;
 	}
@@ -29,8 +29,8 @@ esp_err_t parse_gpio_data(gpio_data *data, char *payload){
 	return ESP_OK;
 }
 
-esp_err_t parse_pwm_data(pwm_data *data, char *payload){
-    cJSON *root = cJSON_Parse(payload);
+esp_err_t parse_pwm_data(pwm_data *data, char **payload){
+    cJSON *root = cJSON_Parse(*payload);
 	if (!validate_json(root, PWM_DATA_MEMBERS, 3)){
 		return ESP_FAIL;
 	}

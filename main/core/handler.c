@@ -4,29 +4,31 @@
 #include "utils/parser.h"
 #include "core.h"
 
-const char *HANDLER_TAG = "HANDLER";
+static const char *TAG = "HANDLER";
 
 void _gpio_handler(void *pvParameters)
 {
     char *payload = pvParameters;
-    gpio_data data;
-    if (parse_gpio_data(&data, payload) == ESP_OK){
-        set_state(data.pin, data.state);
+    gpio_data *data = malloc(sizeof(gpio_data));
+    if (parse_gpio_data(data, &payload) == ESP_OK){
+        set_state(data->pin, data->state);
     }
-    free(payload);
-    free(&data);
+    if (data != NULL){
+        free(data);
+    }
     vTaskDelete(NULL);
 }
 
 void _pwm_handler(void *pvParameters)
 {
     char *payload = pvParameters;
-    pwm_data data;
-    if (parse_pwm_data(&data, payload) == ESP_OK){
-        set_pwm(data.pin, data.channel, data.duty);
+    pwm_data *data = malloc(sizeof(pwm_data));
+    if (parse_pwm_data(data, &payload) == ESP_OK){
+        set_pwm(data->pin, data->channel, data->duty);
     }
-    free(payload);
-    free(&data);
+    if (data != NULL){
+        free(data);
+    }
     vTaskDelete(NULL);
 }
 

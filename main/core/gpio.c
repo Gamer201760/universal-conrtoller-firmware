@@ -7,7 +7,7 @@
 #define ADC_UNIT ADC_UNIT_1
 #define ADC_ATTEN ADC_ATTEN_DB_12
 
-const char* GPIO_TAG = "GPIO";
+static const char* TAG = "GPIO";
 
 adc_oneshot_unit_handle_t adc_handle;
 const adc_oneshot_chan_cfg_t config = {
@@ -49,7 +49,7 @@ void adc_pin_init(gpio_num_t pin){
     adc_channel_t channel;
     adc_unit_t unit_id;
     if (adc_continuous_io_to_channel(pin, &unit_id, &channel) != ESP_OK || unit_id != ADC_UNIT){
-        ESP_LOGE(GPIO_TAG, "%d adc pin is not valid, please select another", pin);
+        ESP_LOGE(TAG, "%d adc pin is not valid, please select another", pin);
         return;
     }
     ESP_ERROR_CHECK(adc_oneshot_config_channel(adc_handle, channel, &config));
@@ -60,7 +60,7 @@ void adc_pin_read(gpio_num_t pin, int *data){
     adc_unit_t unit_id;
 
     if (adc_continuous_io_to_channel(pin, &unit_id, &channel) != ESP_OK || unit_id != ADC_UNIT){
-        ESP_LOGE(GPIO_TAG, "%d adc pin is not valid, please select another", pin);
+        ESP_LOGE(TAG, "%d adc pin is not valid, please select another", pin);
         return;
     }
     ESP_ERROR_CHECK(adc_oneshot_read(adc_handle, channel, data));

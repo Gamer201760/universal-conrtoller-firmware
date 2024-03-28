@@ -2,7 +2,7 @@
 #include "esp_log.h"
 #include "core/core.h"
 
-const char *TAG = "MAIN";
+static const char *TAG = "MAIN";
 
 void app_main(void)
 {

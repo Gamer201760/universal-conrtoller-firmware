@@ -15,7 +15,7 @@ typedef struct pwm_data
     int channel;
 } pwm_data;
 
-esp_err_t parse_gpio_data(gpio_data *data, char *payload);
-esp_err_t parse_pwm_data(pwm_data *data, char *payload);
+esp_err_t parse_gpio_data(gpio_data *data, char **payload);
+esp_err_t parse_pwm_data(pwm_data *data, char **payload);
 void serialize_btn(int *data, char **payload);
 void serialize_adc(int *data, char **payload);
