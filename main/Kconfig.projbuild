@@ -1,0 +1,9 @@
+menu "User Config Universal Controller"
+config WIFI_SSID
+    string "Wifi SSID"
+config WIFI_PASSWORD
+    string "Wifi password"
+config MQTT_BROKER_URL
+    string "MQTT Broker URL"
+    default "mqtt://127.0.0.1"
+endmenu
