@@ -48,3 +48,7 @@ void serialize_btn(int *data, char **payload){
 void serialize_adc(int *data, char **payload){
 	sprintf(*payload, "{\"value\": %d}", *data);
 }
+
+void serialize_ds18x20(float *data, char **payload){
+	sprintf(*payload, "{\"value\": %.3f}", *data);
+}

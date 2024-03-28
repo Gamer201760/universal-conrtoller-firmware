@@ -19,8 +19,7 @@ void btn_publisher(void *params)
         for (int i = 0; i < sizeof(btn_pins) / sizeof(btn_pins[0]); i++)
         {
             int data;
-            char *payload;
-            payload = malloc(32);
+            char *payload = malloc(32);
             
             itoa(btn_pins[i], topic + 16, 10);
             data = gpio_get_level(btn_pins[i]);
