@@ -8,6 +8,10 @@
 static EventGroupHandle_t s_mqtt_event_group;
 static const char* TAG = "MQTT";
 
+extern const uint8_t mqtt_io_pem_start[]   asm("_binary_mqtt_server_pem_start");
+extern const uint8_t mqtt_io_pem_end[]   asm("_binary_mqtt_server_pem_end");
+
+
 
 static void log_error_if_nonzero(const char *message, int error_code)
 {
@@ -68,6 +72,11 @@ void mqtt_init(){
     s_mqtt_event_group = xEventGroupCreate();
     const esp_mqtt_client_config_t mqtt_cfg = {
         .broker.address.uri = CONFIG_MQTT_BROKER_URL,
+        .broker.verification.certificate = (const char *)mqtt_io_pem_start,
+        .credentials.authentication = {
+            .password = CONFIG_MQTT_PASSWORD
+        },
+        .credentials.username = CONFIG_MQTT_USERNAME
     };
     esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
     ESP_ERROR_CHECK(esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client));

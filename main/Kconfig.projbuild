@@ -6,4 +6,8 @@ config WIFI_PASSWORD
 config MQTT_BROKER_URL
     string "MQTT Broker URL"
     default "mqtt://127.0.0.1"
+config MQTT_USERNAME
+    string "MQTT SSID"
+config MQTT_PASSWORD
+    string "MQTT password"
 endmenu
