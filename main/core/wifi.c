@@ -17,15 +17,14 @@ static void wifi_handler(void *event_handler_arg, esp_event_base_t event_base, i
         ESP_ERROR_CHECK(esp_wifi_connect());
         break;
     case WIFI_EVENT_STA_CONNECTED:
-        wifi_event_sta_connected_t *raw = (wifi_event_sta_connected_t *)event_data;
-        ESP_LOGI(TAG, "Connected to %s", raw->ssid);
+        ESP_LOGI(TAG, "Connected");
         break;
     case IP_EVENT_STA_GOT_IP:
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
         break;
     case WIFI_EVENT_STA_DISCONNECTED:
-        wifi_event_sta_disconnected_t *data = (wifi_event_sta_disconnected_t *)event_data;
-        ESP_LOGE(TAG, "Disconnected %s", data->ssid);
+        ESP_LOGI(TAG, "Wifi disconnected, retry");
+        ESP_ERROR_CHECK(esp_wifi_connect());
         break;
     }
 }
