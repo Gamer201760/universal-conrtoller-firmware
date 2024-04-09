@@ -6,3 +6,5 @@ cmake_minimum_required(VERSION 3.5)
 
 include(/Users/gglamer/esp/v5.2/esp-idf/tools/cmake/project.cmake)
 project(universal-controller)
+
+target_add_binary_data(universal-controller.elf "main/mqtt_server.pem" TEXT)
