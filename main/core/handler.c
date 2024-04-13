@@ -34,7 +34,7 @@ void _pwm_handler(void *pvParameters)
 
 void handler(char *topic, int len, void *data)
 {
-    if (strncmp(topic, "controller/gpio", len) == 0)
+    if (strncmp(topic, "controller/gpio/ctr", len) == 0)
     {
         xTaskCreate(_gpio_handler, "GPIO_HANDLER", 2048, data, tskIDLE_PRIORITY, NULL);
     } else if (strncmp(topic, "controller/gpio/pwm", len) == 0)

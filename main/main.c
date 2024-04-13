@@ -11,3 +11,8 @@ void app_main(void)
     wifi_init();
     mqtt_init();
 }
+
+/* 
+W (2009764) transport_base: Poll timeout or error, errno=Success, fd=54, timeout_ms=10000
+E (2009764) mqtt_client: Writing didn't complete in specified timeout: errno=0
+*/
