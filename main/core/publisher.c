@@ -36,6 +36,7 @@ void publisher(esp_mqtt_client_handle_t *client)
 }
 
 void publisher_stop(){
+    ESP_LOGI(TAG, "Stop tasks");
     if (BTNHandler != NULL){
         vTaskSuspend(BTNHandler);
         ESP_LOGI(TAG, "BTN task stop");

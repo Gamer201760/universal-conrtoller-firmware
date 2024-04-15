@@ -25,7 +25,7 @@ esp_err_t parse_gpio_data(gpio_data *data, char **payload){
 
 	data->pin = cJSON_GetObjectItem(root, "pin")->valueint;
 	data->state = cJSON_GetObjectItem(root, "state")->valueint;
-	cJSON_free(root);
+	cJSON_Delete(root);
 	return ESP_OK;
 }
 
@@ -37,7 +37,7 @@ esp_err_t parse_pwm_data(pwm_data *data, char **payload){
 	data->pin = cJSON_GetObjectItem(root, "pin")->valueint;
 	data->duty = cJSON_GetObjectItem(root, "duty")->valueint;
 	data->channel = cJSON_GetObjectItem(root, "channel")->valueint;
-	cJSON_free(root);
+	cJSON_Delete(root);
 	return ESP_OK;
 }
 

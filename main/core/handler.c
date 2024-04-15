@@ -37,8 +37,10 @@ void handler(char *topic, int len, void *data)
     if (strncmp(topic, "controller/gpio/ctr", len) == 0)
     {
         xTaskCreate(_gpio_handler, "GPIO_HANDLER", 2048, data, tskIDLE_PRIORITY, NULL);
+        // _gpio_handler(data);
     } else if (strncmp(topic, "controller/gpio/pwm", len) == 0)
     {
-        xTaskCreate(_pwm_handler, "PWM_HANDLER", 2048, data, tskIDLE_PRIORITY, NULL);
+        // xTaskCreate(_pwm_handler, "PWM_HANDLER", 2048, data, tskIDLE_PRIORITY, NULL);
+        // _pwm_handler(data);
     }
 }

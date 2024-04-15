@@ -77,7 +77,8 @@ void mqtt_init(){
         .credentials.authentication = {
             .password = CONFIG_MQTT_PASSWORD
         },
-        .credentials.username = CONFIG_MQTT_USERNAME
+        .credentials.username = CONFIG_MQTT_USERNAME,
+        .task.stack_size = configMINIMAL_STACK_SIZE * 6
     };
     esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
     ESP_ERROR_CHECK(esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, client));
