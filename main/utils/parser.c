@@ -10,7 +10,7 @@ const char* GPIO_DATA_MEMBERS[] = {"pin", "state"};
 bool validate_json(const cJSON *object, const char *members[], const int len){
 	for (int i = 0; i < len; i++){
 		if (!cJSON_HasObjectItem(object, members[i])){
-			ESP_LOGE(PARSER_TAG, "NOT FOUND %s in MSG", members[i]);
+			ESP_LOGD(PARSER_TAG, "NOT FOUND %s in MSG", members[i]);
 			return 0;
 		}
 	}
